@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assignment3
 {
-    public interface ILinkedListADT
+    public interface ILinkedListADT<T>
     {
         /// <summary>
         /// Checks if the list is empty.
