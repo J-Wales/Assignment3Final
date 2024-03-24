@@ -61,14 +61,11 @@ namespace Assignment3.Tests
         [Test]
         public void TestIsEmpty()
         {
-            // Arrange
-            bool a;
-            
             // Act
-            a = users.IsEmpty();
+            bool actual = users.IsEmpty();
 
             // Assert
-            Assert.IsFalse(a);
+            Assert.IsFalse(actual);
         }
 
         [Test]
@@ -88,34 +85,42 @@ namespace Assignment3.Tests
         [Test]
         public void TestAddLast()
         {
-            // Arrange
+			User expected = new User(5, "Jane Doe", "doejane@hotmail.com", "un!d3nt!f!ed");
 
-            // Act
+			// Act
+			users.AddLast(new User(5, "Jane Doe", "doejane@hotmail.com", "un!d3nt!f!ed"));
+			User actual = users.GetValue(4);
 
-            // Assert
-
-        }
+			// Assert
+			Assert.AreEqual(expected, actual);
+		}
 
         [Test]
         public void TestAddFirst()
         {
             // Arrange
+            User expected = new User(5, "Jane Doe", "doejane@hotmail.com", "un!d3nt!f!ed");
 
             // Act
+            users.AddFirst(new User(5, "Jane Doe", "doejane@hotmail.com", "un!d3nt!f!ed"));
+            User actual = users.GetValue(0);
 
             // Assert
-
-        }
+            Assert.AreEqual(expected, actual);
+		}
 
         [Test]
         public void TestAdd()
         {
             // Arrange
+            User expected = new User(5, "Jane Doe", "doejane@hotmail.com", "un!d3nt!f!ed");
 
             // Act
+            users.Add(new User(5, "Jane Doe", "doejane@hotmail.com", "un!d3nt!f!ed"), 1);
+			User actual = users.GetValue(1);
 
             // Assert
-            
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -149,12 +154,15 @@ namespace Assignment3.Tests
         public void TestRemoveFirst()
         {
             // Arrange
+            User expected = new User(2, "Joe Schmoe", "joe.schmoe@outlook.com", "abcdef");
 
             // Act
+            users.RemoveFirst();
+            User actual = users.GetValue(0);
 
             // Assert
-            
-        }
+            Assert.AreEqual(expected, actual);
+		}
 
         [Test]
         public void TestRemoveLast()

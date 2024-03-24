@@ -79,7 +79,7 @@ namespace Assignment3
 
 			if (index < this.Count())
 			{
-				for (int i = 0; i < index; i++)
+				for (int i = 0; i < index-1; i++)
 				{
 					current = current.Next;
 				}
@@ -109,14 +109,13 @@ namespace Assignment3
 		{
 			Node<User> current = Head;
 
-			for (int i = 0; i < index; i++)
-			{
-				current = current.Next;
-			}
-
 			if (current != null)
 			{
-				current = new Node<User>(value);
+				for (int i = 0; i < index; i++)
+				{
+					current = current.Next;
+				}
+				current.Data = value;
 			}
 			else
 			{
