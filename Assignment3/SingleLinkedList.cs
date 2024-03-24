@@ -20,8 +20,9 @@ namespace Assignment3
 
 		public void Clear()
 		{
-
-		}
+			//Sets the header to null, essentially clearing the list
+            head = null;
+        }
 
 		public void AddLast(User value)
 		{
@@ -50,13 +51,37 @@ namespace Assignment3
 
 		public void RemoveFirst()
 		{
+			//Checks if list is empty prior to removing the item
+            if (head == null)
+            {
+				//Throws an exception upon 
+                throw new InvalidOperationException("The list is empty.");
+            }
 
-		}
+            head = head.Next;
+        }
 
 		public void RemoveLast()
 		{
-
-		}
+			//Checks if header is null, Throws an exception if true
+            if (head == null)
+            {
+                throw new InvalidOperationException("The list is empty.");
+            }
+            else
+            {
+				//Creates a var to hold current node 
+                var currentNode = head;
+				//While the list still has nodes, iterates
+                while (currentNode.Next != tail)
+                {
+                    currentNode = currentNode.Next;
+                }
+				//Once at the second last node sets next node to null
+                tail = currentNode;
+                tail.Next = null;
+            }
+        }
 
 		public void Remove(int index)
 		{
