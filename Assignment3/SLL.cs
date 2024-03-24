@@ -7,23 +7,23 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Assignment3
 {
-	internal class SingleLinkedList<T> : ILinkedListADT<T>
+	public class SLL : ILinkedListADT//<T>
 	{
 		public Node<User>? Head { get; protected set; }
 		public Node<User>? Tail {  get; protected set; }
 
-		public int count {  get; protected set; }
+		//public int count {  get; protected set; }
 
-		public SingleLinkedList()
+		public SLL()
 		{
 			Head = null;
 			Tail = null;
-			count = 0;
+			//count = 0;
 		}
 
 		public bool IsEmpty()
 		{
-			if (count == 0)
+			if (this.Count() == 0)
 			{
 				return true;
 			}
@@ -51,7 +51,7 @@ namespace Assignment3
 				Tail.Next = newNode;
 			}
 			Tail = newNode;
-			count++; // Increase the count of nodes.
+			//count++; // Increase the count of nodes.
 
 		}
 
@@ -68,7 +68,7 @@ namespace Assignment3
 				newNode.Next = Head;
 				Head = newNode;
 			}
-			count++; // Increase the count of nodes.
+			//count++; // Increase the count of nodes.
 		}
 
 		public void Add(User value, int index)
@@ -77,6 +77,21 @@ namespace Assignment3
 
 			Node<User> newNode = new Node<User>(value);
 
+			if (index < this.Count())
+			{
+				for (int i = 0; i < index; i++)
+				{
+					current = current.Next;
+				}
+
+				newNode.Next = current.Next;
+				current.Next = newNode;
+			}
+			else
+			{
+				throw new IndexOutOfRangeException("Index out of range.");
+			}
+			/*
 			while (current != null)
 			{
 
@@ -87,6 +102,7 @@ namespace Assignment3
 			}
 
 			throw new IndexOutOfRangeException("Index out of range.");
+			*/
 		}
 
 		public void Replace(User value, int index)
@@ -110,6 +126,14 @@ namespace Assignment3
 
 		public int Count()
 		{
+			Node<User> current = Head;
+			int count = 0;
+			
+			while (current != null)
+			{
+				current = current.Next;
+				count++;
+			}
 			return count;
 		}
 
@@ -173,7 +197,16 @@ namespace Assignment3
 
 		public User GetValue(int index)
 		{
-
+			Node<User> current = Head;
+			while (current != null)
+			{
+				for (int i = 0; i < index; i++)
+				{
+					current = current.Next;
+				}
+				return current.Data;
+			}
+			throw new IndexOutOfRangeException("Index out of range.");
 		}
 
 		public int IndexOf(User value)
@@ -203,16 +236,6 @@ namespace Assignment3
 				current = current.Next;
 			}
 			return false; // Value not found.
-
-
-			bool found = false;
-
-			for (int i = 0; i < this.Count(); i++)
-			{
-
-			}
-
-			return found;
 		}
 	}
 }
