@@ -12,12 +12,28 @@ namespace Assignment3
         /// Checks if the list is empty.
         /// </summary>
         /// <returns>True if it is empty.</returns>
-        bool IsEmpty();
+        bool IsEmpty()
+        {
+            using (var stream = new FileStream("testFileName", FileMode.Open))
+            {
+                if (stream.Length == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
         /// <summary>
         /// Clears the list.
         /// </summary>
-        void Clear();
+        void Clear()
+        {
+
+        }
 
         /// <summary>
         /// Adds to the end of the list.
