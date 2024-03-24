@@ -223,7 +223,22 @@ namespace Assignment3
 			return -1;
         }
 
-		public bool Contains(User value)
+        // Reverse the order of nodes in the linked list
+        public void Reverse()
+        {
+            var prev = (Node)null;
+            var current = Head;
+            while (current != null)
+            {
+                var next = current.Next; // save the next node
+                current.Next = prev; // Reverse the link
+                prev = current;      //Move to the next pair of nodes
+                current = next;
+            }
+            Head = prev; // The new head is the last node in the original list
+        }
+
+        public bool Contains(User value)
 		{
 			Node<User>? current = Head;
 			while (current != null)
