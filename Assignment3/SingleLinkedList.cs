@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Assignment3
 {
 	internal class SingleLinkedList<T> : ILinkedListADT<T>
 	{
-		public Node<User> Head { get; protected set; }
-		public Node<User> Tail {  get; protected set; }
+		public Node<User>? Head { get; protected set; }
+		public Node<User>? Tail {  get; protected set; }
 
 		public int count {  get; protected set; }
+
+		public SingleLinkedList()
+		{
+			Head = null;
+			Tail = null;
+			count = 0;
+		}
 
 		public bool IsEmpty()
 		{
@@ -29,17 +37,27 @@ namespace Assignment3
 		{
 			//Sets the header to null, essentially clearing the list
             Head = null;
-        }
+		}
 
 		public void AddLast(User value)
 		{
+			Node<User>? newNode = new Node<User>(value); // Create a new node.
+			if (Head == null) // If the list is empty, head and tail point to the new node.
+			{
+				Head = newNode;
+			}
+			else // If the list is not empty, link current tail to new node and update tail.
+			{
+				Tail.Next = newNode;
+			}
+			Tail = newNode;
+			count++; // Increase the count of nodes.
 
 		}
 
 		public void AddFirst(User value)
 		{
-			/*
-			Node<T> newNode = new Node<T>(data); // Create a new node.
+			Node<User> newNode = new Node<User>(value); // Create a new node.
 			if (Head == null) // If the list is empty, head and tail point to the new node.
 			{
 				Head = newNode;
@@ -50,18 +68,44 @@ namespace Assignment3
 				newNode.Next = Head;
 				Head = newNode;
 			}
-			Count++; // Increase the count of nodes.
-			*/
+			count++; // Increase the count of nodes.
 		}
 
 		public void Add(User value, int index)
 		{
+			Node<User> current = Head;
 
+			Node<User> newNode = new Node<User>(value);
+
+			while (current != null)
+			{
+
+				for (int i = 0; i < index; i++)
+				{
+					current = current.Next;
+				}
+			}
+
+			throw new IndexOutOfRangeException("Index out of range.");
 		}
 
 		public void Replace(User value, int index)
 		{
+			Node<User> current = Head;
 
+			for (int i = 0; i < index; i++)
+			{
+				current = current.Next;
+			}
+
+			if (current != null)
+			{
+				current = new Node<User>(value);
+			}
+			else
+			{
+				throw new IndexOutOfRangeException("Index out of range.");
+			}
 		}
 
 		public int Count()
@@ -135,28 +179,21 @@ namespace Assignment3
 		public int IndexOf(User value)
 		{
 			Node<User> current = Head;
-			/*
-			Node<User> newNode = new Node<User>(value);
-			var currentNode = Head;
-
-			int index = -1;
 
 			for (int i = 0; i < this.Count(); i++)
 			{
-				if (newNode == currentNode)
+				if (current.Data.Equals(value))
 				{
-					index = i;
+					return i;
 				}
-				currentNode.Next;
+				current = current.Next;
 			}
-
-			return index;
-			*/
-		}
+			return -1;
+        }
 
 		public bool Contains(User value)
 		{
-			Node<T>? current = Head;
+			Node<User>? current = Head;
 			while (current != null)
 			{
 				if (current.Data.Equals(value))

@@ -12,7 +12,7 @@ namespace Assignment3
 		public T Data { get; set; }
 
 		// Public property 'Next' points to the next node in the list, initially null.
-		public Node<T> Next { get; set; }
+		public Node<T>? Next { get; set; }
 
 		// Constructor to initialize a new node with provided data; 'Next' is by default null.
 		public Node(T data)
