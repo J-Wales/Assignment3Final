@@ -142,7 +142,7 @@ namespace Assignment3
             if (Head == null)
             {
 				//Throws an exception upon 
-                throw new InvalidOperationException("The list is empty.");
+                throw new IndexOutOfRangeException("The list is empty.");
             }
 
             Head = Head.Next;
@@ -153,7 +153,7 @@ namespace Assignment3
 			//Checks if header is null, Throws an exception if true
             if (Head == null)
             {
-                throw new InvalidOperationException("The list is empty.");
+                throw new IndexOutOfRangeException("The list is empty.");
             }
             else
             {
