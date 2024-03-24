@@ -141,8 +141,8 @@ namespace Assignment3
 			//Checks if list is empty prior to removing the item
             if (Head == null)
             {
-				//Throws an exception upon 
-                throw new IndexOutOfRangeException("The list is empty.");
+				//Throws an exception 
+                throw new CannotRemoveException("The list is empty.");
             }
 
             Head = Head.Next;
@@ -153,7 +153,7 @@ namespace Assignment3
 			//Checks if header is null, Throws an exception if true
             if (Head == null)
             {
-                throw new IndexOutOfRangeException("The list is empty.");
+                throw new CannotRemoveException("The list is empty.");
             }
             else
             {
@@ -251,5 +251,13 @@ namespace Assignment3
 			}
 			return false; // Value not found.
 		}
-	}
+
+        // Custom exception for when an index cannot be removed
+        public class CannotRemoveException : Exception
+        {
+            public CannotRemoveException(string message) : base(message)
+            {
+            }
+        }
+    }
 }
