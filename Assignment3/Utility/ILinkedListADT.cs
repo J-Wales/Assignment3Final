@@ -13,18 +13,25 @@ namespace Assignment3
         /// Checks if the list is empty.
         /// </summary>
         /// <returns>True if it is empty.</returns>
-        bool IsEmpty()
+        public bool IsEmpty()
         {
-            using (var stream = new FileStream("testFileName", FileMode.Open))
+            if (File.Exists("testFileName"))
             {
-                if (stream.Length == 0)
+                using (var stream = new FileStream("testFileName", FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                    return true;
+                    if (stream.Length == 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                else
-                {
-                    return false;
-                }
+            }
+            else
+            {
+                return true;
             }
         }
 
@@ -33,7 +40,13 @@ namespace Assignment3
         /// </summary>
         void Clear()
         {
-
+            using (var stream = new FileStream("testFileName", FileMode.Create, FileAccess.Write, FileShare.Write))
+            {
+                using (var writer = new BinaryWriter(stream))
+                {
+                    writer.Write((byte)0);
+                }
+            }
         }
 
         /// <summary>
@@ -46,7 +59,10 @@ namespace Assignment3
         /// Prepends (adds to beginning) value to the list.
         /// </summary>
         /// <param name="value">Value to store inside element.</param>
-        void AddFirst(User value);
+        void AddFirst(User user)
+        {
+            
+        }
 
         /// <summary>
         /// Adds a new element at a specific position.
