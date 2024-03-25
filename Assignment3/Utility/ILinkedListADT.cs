@@ -15,24 +15,7 @@ namespace Assignment3
         /// <returns>True if it is empty.</returns>
         public bool IsEmpty()
         {
-            if (File.Exists("testFileName"))
-            {
-                using (var stream = new FileStream("testFileName", FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    if (stream.Length == 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-            else
-            {
-                return true;
-            }
+            
         }
 
         /// <summary>
@@ -40,13 +23,14 @@ namespace Assignment3
         /// </summary>
         void Clear()
         {
-            using (var stream = new FileStream("testFileName", FileMode.Create, FileAccess.Write, FileShare.Write))
-            {
-                using (var writer = new BinaryWriter(stream))
-                {
-                    writer.Write((byte)0);
-                }
-            }
+            // Deserialize the list of users
+            ILinkedListADT users = SerializationHelper.DeserializeUsers(testFileName);
+
+            // Create an empty list
+            List<User> emptyList = new List<User>();
+
+            // Serialize the empty list to the same file
+            SerializationHelper.SerializeUsers(emptyList, fileName);
         }
 
         /// <summary>
@@ -84,7 +68,28 @@ namespace Assignment3
         /// Gets the number of elements in the list.
         /// </summary>
         /// <returns>Size of list (0 meaning empty)</returns>
-        int Count();
+       int Count()
+        {
+            // Deserialize the list of users
+            ILinkedListADT users = SerializationHelper.DeserializeUsers(testFileName);
+
+            // Return 0 if the list is empty
+            if (users.IsEmpty())
+            {
+                return 0;
+            }
+
+            // Otherwise, return the count of items in the list
+            int count = 0;
+            Node<User> current = users.Head;
+            while (current != null)
+            {
+                count++;
+                current = current.Next;
+            }
+
+            return count;
+        }
 
         /// <summary>
         /// Removes first element from list
