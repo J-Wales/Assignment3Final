@@ -226,7 +226,7 @@ namespace Assignment3
         // Reverse the order of nodes in the linked list
         public void Reverse()
         {
-            var prev = (Node)null;
+            var prev = (Node<User>)null;
             var current = Head;
             while (current != null)
             {
