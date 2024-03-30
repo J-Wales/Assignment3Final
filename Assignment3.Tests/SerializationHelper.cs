@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
+
 namespace Assignment3.Tests
 {
-    public static class SerializationHelper
+	
+	public static class SerializationHelper
     {
         /// <summary>
         /// Serializes (encodes) users
@@ -31,7 +33,8 @@ namespace Assignment3.Tests
         /// <returns>List of users</returns>
         public static ILinkedListADT DeserializeUsers(string fileName)
         {
-            DataContractSerializer serializer = new DataContractSerializer(typeof(List<User>));
+            DataContractSerializer serializer = new DataContractSerializer(typeof(List<User>), new Type[] { typeof(SLL) });
+
             using (FileStream stream = File.OpenRead(fileName))
             {
                 return (ILinkedListADT)serializer.ReadObject(stream);

@@ -1,26 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
+
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace Assignment3
 {
-	public class SLL : ILinkedListADT//<T>
-	{
-		public Node<User>? Head { get; protected set; }
-		public Node<User>? Tail {  get; protected set; }
-
-		//public int count {  get; protected set; }
+	[DataContract]
+    [KnownType(typeof(SLL))]
+	
+	public class SLL : ILinkedListADT
+    {
+		[DataMember]
+        public Node<User> Head { get; set; }
+		[DataMember]
+		public Node<User> Tail { get; set; }
 
 		public SLL()
-		{
-			Head = null;
-			Tail = null;
-			//count = 0;
-		}
+        {
+            Head = null;
+            Tail = null;
+        }
 
+        
 		public bool IsEmpty()
 		{
 			if (this.Count() == 0)
@@ -32,13 +37,13 @@ namespace Assignment3
 				return false;
 			}
 		}
-
+        
 		public void Clear()
 		{
 			//Sets the header to null, essentially clearing the list
             Head = null;
 		}
-
+        
 		public void AddLast(User value)
 		{
 			Node<User>? newNode = new Node<User>(value); // Create a new node.
@@ -54,7 +59,8 @@ namespace Assignment3
 			//count++; // Increase the count of nodes.
 
 		}
-
+		
+        
 		public void AddFirst(User value)
 		{
 			Node<User> newNode = new Node<User>(value); // Create a new node.
@@ -68,11 +74,12 @@ namespace Assignment3
 				newNode.Next = Head;
 				Head = newNode;
 			}
-			//count++; // Increase the count of nodes.
 		}
-
+		
+        
 		public void Add(User value, int index)
 		{
+
 			Node<User> current = Head;
 
 			Node<User> newNode = new Node<User>(value);
@@ -91,20 +98,9 @@ namespace Assignment3
 			{
 				throw new IndexOutOfRangeException("Index out of range.");
 			}
-			/*
-			while (current != null)
-			{
-
-				for (int i = 0; i < index; i++)
-				{
-					current = current.Next;
-				}
-			}
-
-			throw new IndexOutOfRangeException("Index out of range.");
-			*/
 		}
-
+		
+        
 		public void Replace(User value, int index)
 		{
 			Node<User> current = Head;
@@ -122,7 +118,8 @@ namespace Assignment3
 				throw new IndexOutOfRangeException("Index out of range.");
 			}
 		}
-
+		
+        
 		public int Count()
 		{
 			Node<User> current = Head;
@@ -135,7 +132,8 @@ namespace Assignment3
 			}
 			return count;
 		}
-
+		
+        
 		public void RemoveFirst()
 		{
 			//Checks if list is empty prior to removing the item
@@ -147,7 +145,8 @@ namespace Assignment3
 
             Head = Head.Next;
         }
-
+		
+        
 		public void RemoveLast()
 		{
 			//Checks if header is null, Throws an exception if true
@@ -169,7 +168,8 @@ namespace Assignment3
                 Tail.Next = null;
             }
         }
-
+		
+        
 		public void Remove(int index)
 		{
 			//If index points to start of list, call remove first method
@@ -193,7 +193,8 @@ namespace Assignment3
 
 			}
 		}
-
+		
+        
 		public User GetValue(int index)
 		{
 			Node<User> current = Head;
@@ -207,7 +208,7 @@ namespace Assignment3
 			}
 			throw new IndexOutOfRangeException("Index out of range.");
 		}
-
+        
 		public int IndexOf(User value)
 		{
 			Node<User> current = Head;
@@ -222,7 +223,7 @@ namespace Assignment3
 			}
 			return -1;
         }
-
+		
         // Reverse the order of nodes in the linked list
         public void Reverse()
         {
@@ -237,6 +238,7 @@ namespace Assignment3
             }
             Head = prev; // The new head is the last node in the original list
         }
+		
 
         public bool Contains(User value)
 		{
@@ -251,9 +253,9 @@ namespace Assignment3
 			}
 			return false; // Value not found.
 		}
-
-        // Custom exception for when an index cannot be removed
-        public class CannotRemoveException : Exception
+		
+		// Custom exception for when an index cannot be removed
+		public class CannotRemoveException : Exception
         {
             public CannotRemoveException(string message) : base(message)
             {
