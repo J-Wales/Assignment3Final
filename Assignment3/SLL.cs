@@ -25,7 +25,7 @@ namespace Assignment3
             Tail = null;
         }
 
-        
+        // Check if list is empty
 		public bool IsEmpty()
 		{
 			if (this.Count() == 0)
@@ -44,6 +44,7 @@ namespace Assignment3
             Head = null;
 		}
         
+		// Add a node with the spcified value to the end of the list.
 		public void AddLast(User value)
 		{
 			Node<User>? newNode = new Node<User>(value); // Create a new node.
@@ -59,8 +60,8 @@ namespace Assignment3
 			//count++; // Increase the count of nodes.
 
 		}
-		
-        
+
+		// Add a node with the spcified value to the start of the list.
 		public void AddFirst(User value)
 		{
 			Node<User> newNode = new Node<User>(value); // Create a new node.
@@ -76,7 +77,7 @@ namespace Assignment3
 			}
 		}
 		
-        
+        // Add a node with the spcified value at the specified index.
 		public void Add(User value, int index)
 		{
 
@@ -100,7 +101,7 @@ namespace Assignment3
 			}
 		}
 		
-        
+        // Replace the value of the node at the specified index with the specified value.
 		public void Replace(User value, int index)
 		{
 			Node<User> current = Head;
@@ -119,7 +120,7 @@ namespace Assignment3
 			}
 		}
 		
-        
+        // Count the number of nodes in the list.
 		public int Count()
 		{
 			Node<User> current = Head;
@@ -133,7 +134,7 @@ namespace Assignment3
 			return count;
 		}
 		
-        
+        // Remove the first node in the list.
 		public void RemoveFirst()
 		{
 			//Checks if list is empty prior to removing the item
@@ -146,7 +147,7 @@ namespace Assignment3
             Head = Head.Next;
         }
 		
-        
+        // Remove the last node in the list.
 		public void RemoveLast()
 		{
 			//Checks if header is null, Throws an exception if true
@@ -169,7 +170,7 @@ namespace Assignment3
             }
         }
 		
-        
+        // Remove the node at the specified index.
 		public void Remove(int index)
 		{
 			//If index points to start of list, call remove first method
@@ -194,7 +195,7 @@ namespace Assignment3
 			}
 		}
 		
-        
+        // Get the value of the node at the specified index.
 		public User GetValue(int index)
 		{
 			Node<User> current = Head;
@@ -209,6 +210,7 @@ namespace Assignment3
 			throw new IndexOutOfRangeException("Index out of range.");
 		}
         
+		// Get the index of a the first node with the specified value.
 		public int IndexOf(User value)
 		{
 			Node<User> current = Head;
